@@ -3,7 +3,7 @@ const cors = require('cors');
 const app = express();
 require('./db/connectdb')
 // const ProductsRoute = require('./Routers/Products.route')
-const UserRoute = require('./Routers/User.route')
+const UserRoute = require('./Routers/user.route')
 const NotesRoute = require("./Routers/Notes.route")
 const CategoryRoute = require("./Routers/Category.route")
 
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 
 app.use(cors({
-  origin: "http://localhost:5173"
+  origin: ["http://localhost:5173","https://week-5-challenge-5-front-end.vercel.app"]
 }));
 
 
