@@ -12,7 +12,7 @@ const navigate = useNavigate()
     const signupData = localStorage.getItem('signup').split(",");
     const token = signupData[2]
     if (token) {
-      const res = await fetch('http://localhost:3000/api/auth/activate-user', {
+      const res = await fetch('https://week-5-challenge-5-backend.vercel.app/api/auth/activate-user', {
         method: "post",
         headers: {
           "content-type": "application/json",

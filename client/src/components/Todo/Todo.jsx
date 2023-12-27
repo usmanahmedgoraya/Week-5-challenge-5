@@ -20,7 +20,7 @@ const Todo = () => {
     const descRef = useRef(null)
     const [category, setCategory] = useState([])
 
-    let domain = "http://localhost:3000"
+    let domain = "https://week-5-challenge-5-backend.vercel.app"
 
     // Fetch all the todo
     const fetchALLTodo = async () => {

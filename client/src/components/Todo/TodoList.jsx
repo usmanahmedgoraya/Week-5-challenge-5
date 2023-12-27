@@ -36,7 +36,7 @@ const TodoList = ({ todo, setEditData, handleEditTodo, handleDeleteTodo, setStat
             }
 
             // Make the API call in the background
-            const res = await fetch(`http://localhost:3000/api/notes/complete-todo/${todo._id}`, {
+            const res = await fetch(`https://week-5-challenge-5-backend.vercel.app/api/notes/complete-todo/${todo._id}`, {
                 method: "put",
                 headers: {
                     "token": token,
