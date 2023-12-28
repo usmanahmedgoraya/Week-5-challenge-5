@@ -31,7 +31,7 @@ export const Searching = ({ original, todos, setTodos }) => {
     }, [searchTerm, todos, original, setTodos]);
 
     return (
-        <div className="w-full flex justify-center my-6">
+        <div className="my-6">
             <form className="form">
                 <label htmlFor="search">
                     <input className="input" type="text" required="" placeholder="Search Todos" id="search" onChange={(e) => setSearchTerm(e.target.value)} />

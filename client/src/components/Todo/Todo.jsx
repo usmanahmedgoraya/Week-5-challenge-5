@@ -358,8 +358,10 @@ const Todo = () => {
                     Remaining Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => !todo.isCompleted).length}</span>
                 </div>
             </div>
+            <div className="flex sm:flex-row flex-col items-center justify-center gap-3">
             <Searching  todos={todos} setTodos={setTodos} original={original} />
             <PriorityFilter handleFilteration={todoFilterHandle} />
+            </div>
             <div className="mt-8 flex flex-wrap justify-center w-full dark:bg-slate-800 ">
                 {Array.isArray(filteredTasks) && filteredTasks !== undefined && filteredTasks?.length > 0 ? (
                     filteredTasks.map((todo) => (

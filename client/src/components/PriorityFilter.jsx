@@ -21,7 +21,7 @@ const filteration = (text) => {
     setValue(text);
 };
     return (
-        <motion.div animate={open ? "open" : "closed"} className="relative my-5">
+        <motion.div animate={open ? "open" : "closed"} className="relative my-5 ">
             <button
                 onClick={() => setOpen((pv) => !pv)}
                 className="flex items-center gap-2 px-3 py-2 rounded-md text-indigo-50 bg-indigo-500 hover:bg-indigo-500 transition-colors"
