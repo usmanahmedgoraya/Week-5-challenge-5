@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import PinInput from 'react-pin-input';
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 
 const ActivateUser = () => {
   const [value, setValue] = useState("")
   const [data, setData] = useState("")
-const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const handleVerify = async () => {
     const signupData = localStorage.getItem('signup').split(",");
@@ -24,7 +24,7 @@ const navigate = useNavigate()
       setData(result.message)
       localStorage.removeItem("signup")
       localStorage.setItem("token", token)
-      if(localStorage.getItem("token")){
+      if (localStorage.getItem("token")) {
         navigate("/")
       }
     }
@@ -51,8 +51,8 @@ const navigate = useNavigate()
         autoSelect={true}
         regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
       />
-      <button onClick={handleVerify} className="rounded-xl bg-gray-100 px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">Verify Code</button>
-      
+      <button onClick={handleVerify} className="rounded-xl px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300">Verify Code</button>
+
     </div>
   )
 }
