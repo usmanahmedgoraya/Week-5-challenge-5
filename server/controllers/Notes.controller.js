@@ -51,7 +51,7 @@ const getNotes = async (req, res) => {
         const notes = await Notes.find({ user: req.user.user._id })
             .populate('categories');
 
-        res.status(200).json({ notes });
+        res.status(200).json({ notes,user:req.user.user });
     } catch (error) {
         res.status(500).send('Some unexpected Error Occurred!!!');
     }

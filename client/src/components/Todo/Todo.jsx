@@ -1,14 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState } from "react";
-import TodoList from "./TodoList";
 import { FaRegSquarePlus } from "react-icons/fa6";
-import { IoMdNuclear } from "react-icons/io";
 import { GrCompliance } from "react-icons/gr";
+import { IoMdNuclear } from "react-icons/io";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Dropdown from "../Dropdown";
 import CategoryModal from "../CategoryModal";
+import Dropdown from "../Dropdown";
+import PriorityFilter from "../PriorityFilter";
 import { Searching } from "../Searching";
+import TodoList from "./TodoList";
 
 const Todo = () => {
     const [priority, setPriority] = useState()
@@ -21,6 +22,7 @@ const Todo = () => {
     const descRef = useRef(null)
     const [category, setCategory] = useState([])
     const [original, setOriginal] = useState()
+    const [filteredTasks, setFilteredTasks] = useState([]);
 
     let domain = "https://week-5-challenge-5-backend.vercel.app"
     // let domain = "http://localhost:3000"
@@ -43,6 +45,7 @@ const Todo = () => {
             console.log(data.notes)
             setTodos(data.notes.reverse())
             setOriginal(data.notes.reverse());
+            setFilteredTasks(data.notes.reverse())
         } catch (error) {
             console.log(error.message);
         }
@@ -299,6 +302,14 @@ const Todo = () => {
             });
         }
     }
+    const todoFilterHandle = (text) => {
+        if(text === "All"){
+            setFilteredTasks(original);
+        }else{
+            const filteredTodos = original?.filter((todo) => todo.priority === text);
+            setFilteredTasks(filteredTodos);
+        }
+    }
     return (
         <>
             <ToastContainer
@@ -341,16 +352,17 @@ const Todo = () => {
                     All Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.length}</span>
                 </div>
                 <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    Complete Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => todo.completed).length}</span>
+                    Complete Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => todo.isCompleted).length}</span>
                 </div>
                 <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    Remaining Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => !todo.completed).length}</span>
+                    Remaining Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => !todo.isCompleted).length}</span>
                 </div>
             </div>
-            <Searching todos={todos} setTodos={setTodos} original={original} />
+            <Searching  todos={todos} setTodos={setTodos} original={original} />
+            <PriorityFilter handleFilteration={todoFilterHandle} />
             <div className="mt-8 flex flex-wrap justify-center w-full dark:bg-slate-800 ">
-                {Array.isArray(todos) && todos !== undefined && todos?.length > 0 ? (
-                    todos.map((todo) => (
+                {Array.isArray(filteredTasks) && filteredTasks !== undefined && filteredTasks?.length > 0 ? (
+                    filteredTasks.map((todo) => (
                         <div key={todo._id} className="m-2 mb-8 dark:bg-slate-800">
                             <TodoList
                                 todo={todo}
