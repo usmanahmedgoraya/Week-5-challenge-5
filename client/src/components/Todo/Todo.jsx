@@ -338,26 +338,33 @@ const Todo = () => {
             <div className="flex justify-center flex-wrap my-8 space-x-4">
 
                 <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    All Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos.length}</span>
+                    All Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.length}</span>
                 </div>
                 <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    Complete Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos.filter(todo => todo.completed).length}</span>
+                    Complete Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => todo.completed).length}</span>
                 </div>
                 <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    Remaining Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos.filter(todo => !todo.completed).length}</span>
+                    Remaining Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => !todo.completed).length}</span>
                 </div>
             </div>
             <Searching todos={todos} setTodos={setTodos} original={original} />
             <div className="mt-8 flex flex-wrap justify-center w-full dark:bg-slate-800 ">
-                {todos.length===0&& <h1 className="text-white my-7">No Search Result Found</h1>}
-
-                    {Array.isArray(todos) && todos.map((todo) => {
-                        return (
-                            <div key={todo._id} className="m-2 mb-8 dark:bg-slate-800">
-                            <TodoList todo={todo} editData={editData} setEditData={setEditData} handleEditTodo={handleEditTodo} handleDeleteTodo={handleDeleteTodo} setStateManage={setStateManage} />
+                {Array.isArray(todos) && todos !== undefined && todos?.length > 0 ? (
+                    todos.map((todo) => (
+                        <div key={todo._id} className="m-2 mb-8 dark:bg-slate-800">
+                            <TodoList
+                                todo={todo}
+                                editData={editData}
+                                setEditData={setEditData}
+                                handleEditTodo={handleEditTodo}
+                                handleDeleteTodo={handleDeleteTodo}
+                                setStateManage={setStateManage}
+                            />
                         </div>
-                    )
-                })}
+                    ))
+                ) : (
+                    <h1 className="text-white my-7">No Search Result Found</h1>
+                )}
             </div>
         </>
     )
