@@ -16,7 +16,7 @@ const App = () => {
     }
   }, [])
   return (
-    <div className="">
+    <div className="dark:bg-gray-800 min-h-screen">
       {/* <Login/> */}
       <Routes>
         <Route path="/" element={<Home />} />
