@@ -32,7 +32,7 @@ const Signup = () => {
             body: JSON.stringify({ name, email, password })
         })
         const result = await res.json();
-        console.log(Object.values(result))
+        // console.log(Object.values(result))
         toast.success('Sigup Successfully', {
             position: "top-right",
             autoClose: 1000,

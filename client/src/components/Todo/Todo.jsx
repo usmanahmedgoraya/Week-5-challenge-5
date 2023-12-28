@@ -42,7 +42,7 @@ const Todo = () => {
                 }
             })
             const data = await res.json();
-            console.log(data.notes)
+            // console.log(data.notes)
             setTodos(data.notes.reverse())
             setOriginal(data.notes.reverse());
             setFilteredTasks(data.notes.reverse())

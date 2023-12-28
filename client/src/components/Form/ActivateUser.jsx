@@ -20,7 +20,7 @@ const ActivateUser = () => {
         body: JSON.stringify({ activationToken: token, activationCode: value })
       })
       const result = await res.json();
-      console.log(result)
+      // console.log(result)
       setData(result.message)
       localStorage.removeItem("signup")
       localStorage.setItem("token", token)

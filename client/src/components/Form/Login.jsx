@@ -21,7 +21,7 @@ const Login = () => {
     else if (e.target.name === "password") {
       setPassword(e.target.value)
     }
-    console.log(e.target.value)
+    // console.log(e.target.value)
   }
   // Get User Function
   const getUser = async () => {
@@ -55,7 +55,7 @@ const Login = () => {
       else {
         navigate("/")
       }
-      console.log(result);
+      // console.log(result);
     }
   }
   const handleSubmit = async () => {
@@ -67,7 +67,7 @@ const Login = () => {
       body: JSON.stringify({ email, password })
     })
     const result = await res.json();
-    console.log(result.token)
+    // console.log(result.token)
     localStorage.setItem("token", result.token);
     getUser()
   }
