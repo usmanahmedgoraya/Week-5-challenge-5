@@ -14,7 +14,9 @@ const sendMail = async (options) => {
         auth: {
             user: process.env.SMTP_EMAIL,
             pass: process.env.SMTP_PASSWORD
-        }
+        },
+        debug: true,
+        secure: true,
     });
 
     // Destructuring the Options
@@ -30,7 +32,7 @@ const sendMail = async (options) => {
         subject,
         html
     });
-    transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
 }
 
 module.exports = sendMail;

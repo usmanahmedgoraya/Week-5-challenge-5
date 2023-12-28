@@ -24,23 +24,23 @@ const Login = () => {
     console.log(e.target.value)
   }
   // Get User Function
-  const getUser = async() =>{
+  const getUser = async () => {
     let token = localStorage.getItem('token');
-    if(!token){
+    if (!token) {
       return navigate("/login");
     } else {
-      const res = await fetch('https://week-5-challenge-5-backend.vercel.app/api/auth/sign-in',{
-        method:"post",
-        headers:{
-          "content-type":"application/json",
-          "token":token
+      const res = await fetch('https://week-5-challenge-5-backend.vercel.app/api/auth/sign-in', {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+          "token": token
         }
       })
-      if(!res){
+      if (!res) {
         return navigate("/login");
       }
-      const result= await res.json()
-      if(!result.user){
+      const result = await res.json()
+      if (!result.user) {
         toast.error('Incorrect Credentials', {
           position: "top-right",
           autoClose: 1000,
@@ -50,9 +50,9 @@ const Login = () => {
           draggable: true,
           progress: undefined,
           theme: "dark",
-      });
+        });
       }
-      else{
+      else {
         navigate("/")
       }
       console.log(result);
@@ -107,17 +107,17 @@ const Login = () => {
         </div>
       </div>
       <ToastContainer
-                position="top-right"
-                autoClose={1000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-            />
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   )
 }
