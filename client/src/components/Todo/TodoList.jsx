@@ -14,6 +14,7 @@ const TodoList = ({ todo, setEditData, handleEditTodo, handleDeleteTodo, setStat
     };
 
     const handleDelete = () => {
+        console.log(todo._id)
         handleDeleteTodo(todo._id);
     };
 
