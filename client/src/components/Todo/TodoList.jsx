@@ -9,8 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const TodoList = ({ todo, setEditData, handleEditTodo, handleDeleteTodo, setStateManage }) => {
     const checkboxRef = useRef(null);
 
-    const handleEdit = (title, desc,priority,category) => {
-        handleEditTodo(todo._id, title, desc,priority,category);
+    const handleEdit = (title, desc, priority, category) => {
+        handleEditTodo(todo._id, title, desc, priority, category);
     };
 
     const handleDelete = () => {
@@ -92,7 +92,7 @@ const TodoList = ({ todo, setEditData, handleEditTodo, handleDeleteTodo, setStat
                 <div className="block max-w-[20rem] p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer">
                     <div className="grid grid-cols-6 place-items-center">
                         {todo.isCompleted !== undefined && (
-                            <div className="checkbox-wrapper dark:text-white" >
+                            <div className="checkbox-wrapper dark:text-white mb-8" >
                                 <label>
                                     <input
                                         checked={todo.isCompleted}
@@ -109,10 +109,24 @@ const TodoList = ({ todo, setEditData, handleEditTodo, handleDeleteTodo, setStat
                             <h5 className="text-xl break-normal font-bold tracking-tight text-gray-900 dark:text-white">{todo.title}</h5>
                             <p className="font-normal text-gray-700 dark:text-gray-400">{todo.description}</p>
                         </div>
-                        <div className="flex space-x-2 text-xl mt-2">
-                            <Modal handleEdit={handleEdit} todo={todo} />
-                            <MdDelete className="cursor-pointer dark:text-white hover:text-red-700 dark:hover:text-red-500" onClick={handleDelete} />
+                        <div>
+                            <div className="bg-cyan-600 text-white text-center py-0.5 px-2 rounded-md">
+                                {todo.priority}
+                            </div>
+                            <div className="flex space-x-2 text-xl mt-2">
+                                <Modal handleEdit={handleEdit} todo={todo} />
+                                <MdDelete className="cursor-pointer dark:text-white hover:text-red-700 dark:hover:text-red-500" onClick={handleDelete} />
+                            </div>
                         </div>
+                    </div>
+                    <div className="my-3 flex">
+                        {todo.categories?.map(cat => {
+                            return <div key={todo._id} >
+                                <span className="bg-cyan-700 text-white px-2 py-1 m-1 rounded-md">
+                                    {cat.name}
+                                </span>
+                            </div>
+                        })}
                     </div>
                 </div>
             )}

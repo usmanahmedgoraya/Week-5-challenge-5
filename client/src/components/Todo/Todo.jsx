@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Dropdown from "../Dropdown";
 import CategoryModal from "../CategoryModal";
+import { Searching } from "../Searching";
 
 const Todo = () => {
     const [priority, setPriority] = useState()
@@ -19,8 +20,10 @@ const Todo = () => {
     const [stateManage, setStateManage] = useState(false);
     const descRef = useRef(null)
     const [category, setCategory] = useState([])
+    const [original, setOriginal] = useState()
 
     let domain = "https://week-5-challenge-5-backend.vercel.app"
+    // let domain = "http://localhost:3000"
 
     // Fetch all the todo
     const fetchALLTodo = async () => {
@@ -39,6 +42,7 @@ const Todo = () => {
             const data = await res.json();
             console.log(data.notes)
             setTodos(data.notes.reverse())
+            setOriginal(data.notes.reverse());
         } catch (error) {
             console.log(error.message);
         }
@@ -343,10 +347,13 @@ const Todo = () => {
                     Remaining Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos.filter(todo => !todo.completed).length}</span>
                 </div>
             </div>
+            <Searching todos={todos} setTodos={setTodos} original={original} />
             <div className="mt-8 flex flex-wrap justify-center w-full dark:bg-slate-800 ">
-                {Array.isArray(todos) && todos.map((todo) => {
-                    return (
-                        <div key={todo._id} className="m-2 mb-8 dark:bg-slate-800">
+                {todos.length===0&& <h1 className="text-white my-7">No Search Result Found</h1>}
+
+                    {Array.isArray(todos) && todos.map((todo) => {
+                        return (
+                            <div key={todo._id} className="m-2 mb-8 dark:bg-slate-800">
                             <TodoList todo={todo} editData={editData} setEditData={setEditData} handleEditTodo={handleEditTodo} handleDeleteTodo={handleDeleteTodo} setStateManage={setStateManage} />
                         </div>
                     )
