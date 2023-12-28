@@ -360,7 +360,9 @@ const Todo = () => {
             </div>
             <div className="flex sm:flex-row flex-col items-center justify-center gap-3">
             <Searching  todos={todos} setTodos={setTodos} original={original} />
+            {filteredTasks?.length>0 && 
             <PriorityFilter handleFilteration={todoFilterHandle} />
+            }
             </div>
             <div className="mt-8 flex flex-wrap justify-center w-full dark:bg-slate-800 ">
                 {Array.isArray(filteredTasks) && filteredTasks !== undefined && filteredTasks?.length > 0 ? (

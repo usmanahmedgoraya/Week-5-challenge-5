@@ -40,7 +40,7 @@ const filteration = (text) => {
                 initial={wrapperVariants.closed}
                 variants={wrapperVariants}
                 style={{ originY: "top", translateX: "-50%" }}
-                className="flex flex-col gap-2 p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] w-48 overflow-hidden "
+                className="flex flex-col gap-1 p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] w-48 overflow-hidden "
             >
                 <Option handleFilter={filteration} setOpen={setOpen} Icon={DiGhostSmall} text="All"  />
                 <Option handleFilter={filteration} setOpen={setOpen} Icon={PiCellSignalHighBold} text="High"  />
