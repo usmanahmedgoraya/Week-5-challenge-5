@@ -29,7 +29,7 @@ export const Searching = ({ setFilteredTasks,filteredTasks,todos }) => {
     return () => clearTimeout(timer);
 
     // Adding searchTerm and todos as dependencies to ensure the latest values are used
-  }, [searchTerm, todos, filteredTasks,setFilteredTasks]);
+  }, [searchTerm, todos]);
 
   return (
     <div className="my-6">

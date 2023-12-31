@@ -418,20 +418,20 @@ const Todo = () => {
                     initial={{ y: -30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1, transition: { delay: 0.6 } }}
                     className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    All Todos: {loading ? <MoonLoader color="#36d7b7" size={20} className="mx-3" /> : <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.length}</span>
+                    All Todos: {loading ? <MoonLoader color="#36d7b7" size={20} className="mx-3" /> : <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{filteredTasks !== 'undefined' && filteredTasks?.length}</span>
                     }
                 </motion.div>
                 <motion.div
                     initial={{ y: -30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1, transition: { delay: 0.9 } }}
                     className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    Complete Todos: {loading ? <MoonLoader color="#36d7b7" size={20} className="mx-3" /> : <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => todo.isCompleted).length}</span>}
+                    Complete Todos: {loading ? <MoonLoader color="#36d7b7" size={20} className="mx-3" /> : <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{filteredTasks !== 'undefined' && filteredTasks?.filter(todo => todo.isCompleted).length}</span>}
                 </motion.div>
                 <motion.div
                 initial={{ y: -30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1, transition: { delay: 1.2 } }}
                 className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    Remaining Todos: {loading ? <MoonLoader color="#36d7b7" size={20} className="mx-3" /> : <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => !todo.isCompleted).length}</span>}
+                    Remaining Todos: {loading ? <MoonLoader color="#36d7b7" size={20} className="mx-3" /> : <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{filteredTasks !== 'undefined' && filteredTasks?.filter(todo => !todo.isCompleted).length}</span>}
                 </motion.div>
             </div>
             <div className="flex sm:flex-row flex-col items-center justify-center gap-3">
