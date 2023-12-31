@@ -96,7 +96,7 @@ const Signup = () => {
                 pauseOnHover
                 theme="dark"
             />
-            <div className="min-h-screen bg-gray-100 dark:bg-gray-700 py-6 flex flex-col justify-center sm:py-12">
+            <div className="min-h-screen bg-gray-100 dark:bg-gray-700 py-6 flex flex-col justify-center sm:py-12 overflow-x-hidden">
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1, transition: { delay: 0.3 } }}

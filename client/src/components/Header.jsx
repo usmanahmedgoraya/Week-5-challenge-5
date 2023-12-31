@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DarkMode from "./DarkMode";
+import { motion } from "framer-motion";
+
 const Header = () => {
     const [token, setToken] = useState();
 
@@ -25,7 +27,10 @@ const Header = () => {
                         </svg>
                         <Link to={"/"} className="ml-3 text-xl">Upnote</Link>
                     </Link>
-                    <div className="flex space-x-5 items-center mt-4">
+                    <motion.div
+                    initial={{x:1600}}
+                    animate={{x:0}}
+                     className="flex space-x-5 items-center mt-4">
 
                         {
                             token ? <Link to={"/login"} className="inline-flex items-center bg-gray-800 border-0 py-2 px-3 focus:outline-none hover:bg-gray-700 rounded text-base md:mt-0" onClick={handleLogout}>
@@ -40,7 +45,7 @@ const Header = () => {
                             </div>
                         }
                         <DarkMode />
-                    </div>
+                    </motion.div>
                 </div>
             </header>
         </div>
