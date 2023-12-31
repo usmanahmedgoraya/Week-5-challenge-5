@@ -16,6 +16,7 @@ const App = () => {
       navigate("/")
     }
   }, [])
+  
   return (
     <div className="dark:bg-gray-800 min-h-screen">
       {/* <Login/> */}

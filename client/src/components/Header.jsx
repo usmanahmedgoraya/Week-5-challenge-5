@@ -1,15 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DarkMode from "./DarkMode";
 const Header = () => {
     const [token, setToken] = useState();
+
     useEffect(() => {
         setToken(localStorage.getItem('token'))
-    }, [token])
+    }, [localStorage.getItem("token")])
 
+    // handle Logout
     const handleLogout = () => {
         localStorage.removeItem("token")
     }
+
+
     return (
         <div>
             <header className="text-gray-400 bg-gray-900 body-font flex items-center">
