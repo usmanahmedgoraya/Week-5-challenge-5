@@ -5,7 +5,7 @@ const Header = () => {
     const [token, setToken] = useState();
     useEffect(() => {
         setToken(localStorage.getItem('token'))
-    }, [])
+    }, [token])
 
     const handleLogout = () => {
         localStorage.removeItem("token")
