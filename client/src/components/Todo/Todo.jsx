@@ -435,7 +435,7 @@ const Todo = () => {
                 </motion.div>
             </div>
             <div className="flex sm:flex-row flex-col items-center justify-center gap-3">
-                <Searching todos={todos} setTodos={setTodos} original={original} />
+                <Searching todos={todos} filteredTasks={filteredTasks} setFilteredTasks={setFilteredTasks} />
                 {filteredTasks?.length > 0 &&
                     <PriorityFilter handleFilteration={todoFilterHandle} />
                 }
