@@ -273,7 +273,9 @@ const Todo = () => {
             }
             const res = await fetch(`${domain}/api/notes/clear-completed`, {
                 method: "delete",
-                "token": token
+                headers:{
+                    "token": token
+                }
             });
             const data = await res.json()
             console.log(data);
