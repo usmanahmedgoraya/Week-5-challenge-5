@@ -4,6 +4,7 @@ import Signup from "./components/Form/Signup"
 import Home from "./components/Home"
 import ActivateUser from "./components/Form/ActivateUser"
 import { useEffect } from "react"
+import Header from "./components/Header"
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
   return (
     <div className="dark:bg-gray-800 min-h-screen">
       {/* <Login/> */}
+      <Header/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />

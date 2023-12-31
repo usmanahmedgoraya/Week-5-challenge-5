@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import Header from "./Header";
 import Todo from "./Todo/Todo";
 
 const Home = () => {
@@ -32,7 +31,6 @@ const Home = () => {
   
   return (
     <div className="dark:bg-gray-800  ">
-      <Header/>
       <Todo/>
     </div>
   )

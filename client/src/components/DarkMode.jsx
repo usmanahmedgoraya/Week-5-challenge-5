@@ -38,7 +38,7 @@ const DarkMode = () => {
   }
   return (
          <>
-            <div className="w-full flex items-center justify-center ">
+            <div className="w-full flex items-center justify-center mt-4 md:mt-0 ">
 
                 <input checked={darkMode} id="checkbox" type="checkbox" onChange={handleDarkMode} />
                 <label className="switch" htmlFor="checkbox">

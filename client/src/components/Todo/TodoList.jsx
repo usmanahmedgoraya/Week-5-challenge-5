@@ -45,9 +45,9 @@ const TodoList = ({ todo, setEditData, handleEditTodo, handleDeleteTodo, setStat
             });
 
             const data = await res.json();
-            console.log(data.notes?.isCompleted);
+            console.log(data);
             setStateManage((prev) => !prev);
-            if (data.notes?.isCompleted === true) {
+            if (data.note?.isCompleted ===false) {
                 toast.success('Todo Uncompleted Successfully', {
                     position: "top-right",
                     autoClose: 1300,

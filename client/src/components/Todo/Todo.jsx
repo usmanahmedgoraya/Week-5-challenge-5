@@ -10,6 +10,7 @@ import Dropdown from "../Dropdown";
 import PriorityFilter from "../PriorityFilter";
 import { Searching } from "../Searching";
 import TodoList from "./TodoList";
+import { DotLoader, MoonLoader } from 'react-spinners'
 
 const Todo = () => {
     const [priority, setPriority] = useState()
@@ -23,6 +24,7 @@ const Todo = () => {
     const [category, setCategory] = useState([])
     const [original, setOriginal] = useState()
     const [filteredTasks, setFilteredTasks] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     let domain = "https://week-5-challenge-5-backend.vercel.app"
     // let domain = "http://localhost:3000"
@@ -30,6 +32,7 @@ const Todo = () => {
     // Fetch all the todo
     const fetchALLTodo = async () => {
         try {
+            setLoading(true);
             const token = localStorage.getItem("token")
             if (!token) {
                 return console.log("Not Authorized")
@@ -48,6 +51,8 @@ const Todo = () => {
             setFilteredTasks(data.notes.reverse())
         } catch (error) {
             console.log(error.message);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -69,7 +74,7 @@ const Todo = () => {
     // handle AddTodo Button 
     const handleAddToDo = async () => {
         try {
-
+            setLoading(true);
             if (title && desc) {
                 if (title.length <= 40) {
                     const token = localStorage.getItem("token")
@@ -90,6 +95,7 @@ const Todo = () => {
                     setCategory([]);
                     setPriority("")
                     setStateManage(prev => !prev);
+                    setLoading(false);
                     toast.success('Todo Add Successfully', {
                         position: "top-right",
                         autoClose: 1000,
@@ -112,6 +118,7 @@ const Todo = () => {
                         progress: undefined,
                         theme: "dark",
                     });
+                    setLoading(false);
                 }
             }
             else {
@@ -125,12 +132,14 @@ const Todo = () => {
                     progress: undefined,
                     theme: "dark",
                 });
+                setLoading(false);
 
             }
             setDesc("")
             setTitle("")
             titleRef.current.value = null
             descRef.current.value = null
+            setLoading(false);
         } catch (error) {
             console.log(error.message);
             toast.error('Something went wrong!', {
@@ -143,12 +152,14 @@ const Todo = () => {
                 progress: undefined,
                 theme: "dark",
             });
+            setLoading(false);
         }
     }
 
     // Handle Function for Edit
     const handleEditTodo = async (id, title, desc, priority, category) => {
         try {
+            setLoading(true);
             const token = localStorage.getItem("token")
             if (!token) {
                 return console.log("Not Authorized")
@@ -164,6 +175,7 @@ const Todo = () => {
             const data = await res.json();
             console.log(data);
             setStateManage(prev => !prev);
+            setLoading(false);
             toast.success('Edited Successfully', {
                 position: "top-right",
                 autoClose: 1000,
@@ -186,12 +198,14 @@ const Todo = () => {
                 progress: undefined,
                 theme: "dark",
             });
+            setLoading(false);
         }
     }
 
     // Handle Function for Delete
     const handleDeleteTodo = async (id) => {
         try {
+            setLoading(true);
             const token = localStorage.getItem("token")
             if (!token) {
                 return console.log("Not Authorized")
@@ -206,6 +220,7 @@ const Todo = () => {
             const data = await res.json();
             console.log(data);
             setStateManage(prev => !prev);
+            setLoading(false);
             toast.success('Deleted Successfully', {
                 position: "top-right",
                 autoClose: 1000,
@@ -228,6 +243,7 @@ const Todo = () => {
                 progress: undefined,
                 theme: "dark",
             });
+            setLoading(false);
         }
 
     }
@@ -235,9 +251,24 @@ const Todo = () => {
     // Clear All Todo Function
     const handleClearAll = async () => {
         try {
+            setLoading(true);
             const token = localStorage.getItem("token")
             if (!token) {
                 return console.log("Not Authorized")
+            }
+            if(filteredTasks.length === 0){
+                toast.warn('Tasks are Empty', {
+                    position: "bottom-left",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+                setLoading(false)
+                return 
             }
             const res = await fetch(`${domain}/api/notes/clear-todo`, {
                 method: "delete",
@@ -249,6 +280,7 @@ const Todo = () => {
             const data = await res.json();
             console.log(data);
             setStateManage(prev => !prev);
+            setLoading(false);
             toast.success('All Todo Clear Successfully', {
                 position: "top-right",
                 autoClose: 1000,
@@ -261,25 +293,52 @@ const Todo = () => {
             });
         } catch (error) {
             console.log(error.message)
+            toast.error('Something Went Wrong', {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            setLoading(false);
         }
     }
 
     // Clear all completed task
     const handleClearCompleted = async () => {
         try {
+            setLoading(true);
             const token = localStorage.getItem("token")
             if (!token) {
                 return console.log("Not Authorized")
             }
+            if(filteredTasks.length === 0){
+                toast.warn('Tasks are Empty', {
+                    position: "bottom-left",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+                setLoading(false)
+                return 
+            }
             const res = await fetch(`${domain}/api/notes/clear-completed`, {
                 method: "delete",
-                headers:{
+                headers: {
                     "token": token
                 }
             });
             const data = await res.json()
             console.log(data);
             setStateManage(prev => !prev);
+            setLoading(false);
             toast.success('Completed Tasks Delete Successfully', {
                 position: "bottom-left",
                 autoClose: 1000,
@@ -302,12 +361,13 @@ const Todo = () => {
                 progress: undefined,
                 theme: "dark",
             });
+            setLoading(false);
         }
     }
     const todoFilterHandle = (text) => {
-        if(text === "All"){
+        if (text === "All") {
             setFilteredTasks(original);
-        }else{
+        } else {
             const filteredTodos = original?.filter((todo) => todo.priority === text);
             setFilteredTasks(filteredTodos);
         }
@@ -351,22 +411,24 @@ const Todo = () => {
             <div className="flex justify-center flex-wrap my-8 space-x-4">
 
                 <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    All Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.length}</span>
+                    All Todos: {loading ? <MoonLoader color="#36d7b7" size={20} className="mx-3" /> : <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.length}</span>
+                    }
                 </div>
                 <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    Complete Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => todo.isCompleted).length}</span>
+                    Complete Todos: {loading ? <MoonLoader color="#36d7b7" size={20} className="mx-3" /> : <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => todo.isCompleted).length}</span>}
                 </div>
                 <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
-                    Remaining Todos: <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => !todo.isCompleted).length}</span>
+                    Remaining Todos: {loading ? <MoonLoader color="#36d7b7" size={20} className="mx-3" /> : <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => !todo.isCompleted).length}</span>}
                 </div>
             </div>
             <div className="flex sm:flex-row flex-col items-center justify-center gap-3">
-            <Searching  todos={todos} setTodos={setTodos} original={original} />
-            {filteredTasks?.length>0 && 
-            <PriorityFilter handleFilteration={todoFilterHandle} />
-            }
+                <Searching todos={todos} setTodos={setTodos} original={original} />
+                {filteredTasks?.length > 0 &&
+                    <PriorityFilter handleFilteration={todoFilterHandle} />
+                }
             </div>
             <div className="mt-8 flex flex-wrap justify-center w-full dark:bg-slate-800 ">
+
                 {Array.isArray(filteredTasks) && filteredTasks !== undefined && filteredTasks?.length > 0 ? (
                     filteredTasks.map((todo) => (
                         <div key={todo._id} className="m-2 mb-8 dark:bg-slate-800">
@@ -380,10 +442,11 @@ const Todo = () => {
                             />
                         </div>
                     ))
-                ) : (
-                    <h1 className="text-white my-7">No Search Result Found</h1>
+                ) : (loading ? <DotLoader color="#36d7b7" /> : (<h1 className="text-white my-7">No Search Result Found</h1>
+                )
+
                 )}
-            </div>
+            </div >
         </>
     )
 }

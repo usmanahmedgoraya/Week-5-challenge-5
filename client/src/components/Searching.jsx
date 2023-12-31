@@ -15,7 +15,7 @@ export const Searching = ({ original, todos, setTodos }) => {
                     // If searchTerm is empty, show all original todos
                     setTodos(original);
                 } else {
-                    const searchResults = todos.filter(
+                    const searchResults = todos?.filter(
                         (item) =>
                             item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                             item.description.toLowerCase().includes(searchTerm.toLowerCase())
