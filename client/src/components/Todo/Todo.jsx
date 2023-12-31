@@ -11,6 +11,7 @@ import PriorityFilter from "../PriorityFilter";
 import { Searching } from "../Searching";
 import TodoList from "./TodoList";
 import { DotLoader, MoonLoader } from 'react-spinners'
+import { motion } from "framer-motion";
 
 const Todo = () => {
     const [priority, setPriority] = useState()
@@ -256,7 +257,7 @@ const Todo = () => {
             if (!token) {
                 return console.log("Not Authorized")
             }
-            if(filteredTasks.length === 0){
+            if (filteredTasks.length === 0) {
                 toast.warn('Tasks are Empty', {
                     position: "bottom-left",
                     autoClose: 1000,
@@ -268,7 +269,7 @@ const Todo = () => {
                     theme: "dark",
                 });
                 setLoading(false)
-                return 
+                return
             }
             const res = await fetch(`${domain}/api/notes/clear-todo`, {
                 method: "delete",
@@ -315,7 +316,7 @@ const Todo = () => {
             if (!token) {
                 return console.log("Not Authorized")
             }
-            if(filteredTasks.length === 0){
+            if (filteredTasks.length === 0) {
                 toast.warn('Tasks are Empty', {
                     position: "bottom-left",
                     autoClose: 1000,
@@ -327,7 +328,7 @@ const Todo = () => {
                     theme: "dark",
                 });
                 setLoading(false)
-                return 
+                return
             }
             const res = await fetch(`${domain}/api/notes/clear-completed`, {
                 method: "delete",
@@ -386,7 +387,10 @@ const Todo = () => {
                 pauseOnHover
                 theme="dark"
             />
-            <div className="h-auto  mt-20 w-full flex justify-center items-center flex-col">
+            <motion.div
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
+            className="h-auto  mt-20 w-full flex justify-center items-center flex-col">
                 <div className="border border-gray-500 bg-gray-900 p-3 rounded-lg w-[16rem] md:w-[20rem]">
                     <div className="flex flex-col">
                         <div className="tracking-wide">
@@ -406,20 +410,29 @@ const Todo = () => {
                         <button className="bg-gray-700 text-white flex justify-center items-center p-2 rounded-md group" onClick={handleClearCompleted}> <GrCompliance className="mx-2 group-active:animate-ping hidden md:inline " />Clear Completed</button>
                     </div>
                 </div>
-            </div>
+            </motion.div>
 
             <div className="flex justify-center flex-wrap my-8 space-x-4">
 
-                <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
+                <motion.div
+                    initial={{ y: -30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1, transition: { delay: 0.6 } }}
+                    className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
                     All Todos: {loading ? <MoonLoader color="#36d7b7" size={20} className="mx-3" /> : <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.length}</span>
                     }
-                </div>
-                <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
+                </motion.div>
+                <motion.div
+                    initial={{ y: -30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1, transition: { delay: 0.9 } }}
+                    className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
                     Complete Todos: {loading ? <MoonLoader color="#36d7b7" size={20} className="mx-3" /> : <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => todo.isCompleted).length}</span>}
-                </div>
-                <div className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
+                </motion.div>
+                <motion.div
+                initial={{ y: -30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1, transition: { delay: 1.2 } }}
+                className="text-white bg-gray-600 p-3 rounded-md flex justify-center items-center my-2">
                     Remaining Todos: {loading ? <MoonLoader color="#36d7b7" size={20} className="mx-3" /> : <span className="py-1 px-2 rounded-md ml-3 bg-cyan-950">{todos !== 'undefined' && todos?.filter(todo => !todo.isCompleted).length}</span>}
-                </div>
+                </motion.div>
             </div>
             <div className="flex sm:flex-row flex-col items-center justify-center gap-3">
                 <Searching todos={todos} setTodos={setTodos} original={original} />
@@ -431,7 +444,10 @@ const Todo = () => {
 
                 {Array.isArray(filteredTasks) && filteredTasks !== undefined && filteredTasks?.length > 0 ? (
                     filteredTasks.map((todo) => (
-                        <div key={todo._id} className="m-2 mb-8 dark:bg-slate-800">
+                        <motion.div
+                        initial={{opacity:0,scale:0.6}}
+                        animate={{opacity:1,scale:1,transition:{delay:0.2}}}
+                         key={todo._id} className="m-2 mb-8 dark:bg-slate-800">
                             <TodoList
                                 todo={todo}
                                 editData={editData}
@@ -440,7 +456,7 @@ const Todo = () => {
                                 handleDeleteTodo={handleDeleteTodo}
                                 setStateManage={setStateManage}
                             />
-                        </div>
+                        </motion.div>
                     ))
                 ) : (loading ? <DotLoader color="#36d7b7" /> : (<h1 className="text-white my-7">No Search Result Found</h1>
                 )
