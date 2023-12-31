@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BeatLoader } from 'react-spinners';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { motion } from "framer-motion";
 
 const Signup = () => {
     const [email, setEmail] = useState();
@@ -36,7 +37,7 @@ const Signup = () => {
                 body: JSON.stringify({ name, email, password })
             })
             const result = await res.json();
-            if(!result.success){
+            if (!result.success) {
                 toast.error('Please Enter credential correctly', {
                     position: "top-right",
                     autoClose: 1000,
@@ -75,15 +76,15 @@ const Signup = () => {
                 progress: undefined,
                 theme: "dark",
             });
-            
-        } finally{
+
+        } finally {
             setLoading(false)
         }
     }
 
     return (
         <>
-        <ToastContainer
+            <ToastContainer
                 position="top-right"
                 autoClose={1000}
                 hideProgressBar={false}
@@ -96,10 +97,16 @@ const Signup = () => {
                 theme="dark"
             />
             <div className="min-h-screen bg-gray-100 dark:bg-gray-700 py-6 flex flex-col justify-center sm:py-12">
-                <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-                    <div
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, transition: { delay: 0.3 } }}
+                    className="relative py-3 sm:max-w-xl sm:mx-auto">
+
+                    <motion.div
+                        initial={{ rotate: 0, top: 12 }}
+                        animate={{ rotate: -6, top: 0, transition: { duration: 0.4, delay: 0.5 } }}
                         className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
-                    </div>
+                    </motion.div>
                     <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20 dark:bg-cyan-950 dark:text-white">
 
                         <div className="max-w-md mx-auto">
@@ -121,7 +128,7 @@ const Signup = () => {
                                         <label htmlFor="password" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm dark:peer-focus:text-white dark:peer-placeholder-shown:text-white">Password</label>
                                     </div>
                                     <div className="relative">
-                                        <button className="bg-cyan-500  text-white rounded-md px-2 py-1 flex justify-center items-center" onClick={handleSubmit}>Signup {loading&& <BeatLoader className="mx-3" color="#ffffff" size={6} />}</button>
+                                        <button className="bg-cyan-500  text-white rounded-md px-2 py-1 flex justify-center items-center" onClick={handleSubmit}>Signup {loading && <BeatLoader className="mx-3" color="#ffffff" size={6} />}</button>
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +139,7 @@ const Signup = () => {
                         </div>
 
                     </div>
-                </div>
+                </motion.div>
 
             </div>
         </>

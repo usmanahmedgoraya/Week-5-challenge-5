@@ -1,10 +1,11 @@
 /* eslint-disable react/no-unknown-property */
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
+import {motion} from 'framer-motion'
 
 const Login = () => {
   const [email, setEmail] = useState();
@@ -115,10 +116,15 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-700 py-6 flex flex-col justify-center sm:py-12">
-      <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-        <div
+      <motion.div
+      initial={{opacity:0}}
+      animate={{opacity:1, transition:{delay:0.3}}}
+       className="relative py-3 sm:max-w-xl sm:mx-auto">
+        <motion.div
+        initial={{rotate:0, top:12}}
+        animate={{rotate:-6,top:0,transition:{duration:0.4,delay:0.5}}}
           className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
-        </div>
+        </motion.div>
         <div className="relative px-4 py-10 bg-white dark:bg-cyan-950 dark:text-white shadow-lg sm:rounded-3xl sm:p-20">
 
           <div className="max-w-md mx-auto">
@@ -146,7 +152,7 @@ const Login = () => {
             Not Registered? <Link to={"/sign-up"} className="text-base tracking-wider font-bold ml-2 mr-1 hover:underline cursor-pointer dark:text-cyan-500">Signup</Link> Now!
           </div>
         </div>
-      </div>
+      </motion.div>
       <ToastContainer
         position="top-right"
         autoClose={1000}
