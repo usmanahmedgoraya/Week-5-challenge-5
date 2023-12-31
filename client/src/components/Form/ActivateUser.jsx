@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from 'react';
 import PinInput from 'react-pin-input';
 import { useNavigate } from "react-router-dom"
 
@@ -7,6 +8,12 @@ const ActivateUser = () => {
   const [value, setValue] = useState("")
   const [data, setData] = useState("")
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const signupData = localStorage.getItem('signup').split(",");
+    setData(signupData[1])
+  }, [])
+  
 
   const handleVerify = async () => {
     const signupData = localStorage.getItem('signup').split(",");
@@ -20,8 +27,8 @@ const ActivateUser = () => {
         body: JSON.stringify({ activationToken: token, activationCode: value })
       })
       const result = await res.json();
-      // console.log(result)
-      setData(result.message)
+      // console.log()
+      
       localStorage.removeItem("signup")
       localStorage.setItem("token", token)
       if (localStorage.getItem("token")) {
@@ -34,8 +41,8 @@ const ActivateUser = () => {
   }
   return (
     <div className="flex justify-center items-center flex-col">
-      <h1>Activate User</h1>
-      <p>{data}</p>
+      <h1 className='text-4xl bg-indigo-600 w-full text-white text-center'>Activate User</h1>
+      <p className='text-xl font-bold my-7 tracking-wider'>{data}</p>
       <PinInput
         length={4}
         initialValue=""
@@ -51,7 +58,7 @@ const ActivateUser = () => {
         autoSelect={true}
         regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
       />
-      <button onClick={handleVerify} className="rounded-xl px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300">Verify Code</button>
+      <button onClick={handleVerify} className="rounded-xl px-5 py-3 text-base font-medium bg-slate-100 text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 my-4">Verify Code</button>
 
     </div>
   )

@@ -47,7 +47,7 @@ export default function Modal({ handleEdit, todo }) {
             {showModal ? (
                 <>
                     <div
-                        className="  justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none filter"
+                        className="  justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none filter mt-4 "
                     >
                         <div className=" relative w-auto my-6 mx-auto max-w-5xl">
                             {/*content*/}
